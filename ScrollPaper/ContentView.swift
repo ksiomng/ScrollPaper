@@ -6,14 +6,32 @@
 //
 
 import SwiftUI
+import Kingfisher
 
 struct ContentView: View {
+    @State var arr: [String] = ["dsjfl", "djaflsdjfl"]
+    
+    init() {
+        UITextView.appearance().backgroundColor = .clear
+    }
+    
     var body: some View {
+        
         VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundStyle(.tint)
-            Text("Hello, world!")
+            ForEach(0..<arr.count, id: \.self) { i in
+                ZStack {
+                    KFImage(URL (string: "https://lh4.googleusercontent.com/proxy/c-v0e5l7AIsDvGqELDtp3j1sWJgchFrVcJrG3DJrkFrieE-OECuOJob3CLdptPp6HfnSrUH3B9WIKQDPMjw1FV1rtVpt-x97EX7cHDcuvlCBqR1NuMS7qTYwbeN1ysuyJ74Dwgi4lvu3SsxSZc5Onw"))
+                        .resizable()
+                        .frame(width: .infinity, height: .infinity)
+                        .clipShape(RoundedRectangle(cornerRadius: 10))
+                    TextEditor(text: $arr[i])
+                        .scrollContentBackground(.hidden)
+                        .background(Color.clear)
+                        .padding(20)
+                }
+                .frame(height: 200)
+                .padding(.bottom,  50)
+            }
         }
         .padding()
     }
